@@ -7,8 +7,7 @@
   "type": "module",
   "scripts": {
     "test": "cross-env NODE_OPTIONS=--experimental-vm-modules TESTING=1 npx jest",
-    "start-rapid": "cross-env RAPID=1 node src/index.js",
-    "start-express": "cross-env node src/app.js",
+    "start": "cross-env RAPID=1 node src/index.js",
     "debug": "cross-env RAPID=1 nodemon src/index.js"
   },
   "repository": {
