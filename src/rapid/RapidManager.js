@@ -1,5 +1,5 @@
 import rapid from '@ovcina/rapidriver';
-import {RiverSubscription} from './RiverSubscription';
+import {RiverSubscription} from './RiverSubscription.js';
 
 export class RapidManager {
 
@@ -11,15 +11,14 @@ export class RapidManager {
     this.#subscriptions = {};
   }
 
-  publishAndWait(river, session, data, callback) {
-    let subscription;
-    if (river in this.#subscriptions) {
-      subscription = this.#subscriptions[river];
-    } else {
-      subscription = new RiverSubscription(this.#host, river);
+  publishAndSubscribe(event, callbackEvent, session, data, callback) {
+    if (!(callbackEvent in this.#subscriptions)) {
+      this.#subscriptions[callbackEvent] = new RiverSubscription(this.#host, 'gateway', callbackEvent);
     }
+    const subscription = this.#subscriptions[callbackEvent];
+
     subscription.addCallback(session, callback);
 
-    rapid.publish(this.#host, river, data);
+    rapid.publish(this.#host, event, data);
   }
 }

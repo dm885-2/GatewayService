@@ -1,16 +1,16 @@
-const express = require('express');
+import express from 'express';
 const router = express.Router();
 
 
-module.exports = function (rapidManager) {
+export default function (rapidManager) {
   /* GET home page. */
   router.get('/', function (req, res, next) {
     res.render('index', {title: 'Express'});
   });
 
-  router.post('/test/:river', function (req, response, next) {
-    rapidManager.publishAndWait('test', 10, req.body, result => {
-      response.send(`respond with a resource: ${result.content.toString()}`);
+  router.post('/test/:event', function (req, response, next) {
+    rapidManager.publishAndSubscribe(req.params.event, `${req.params.event}-callback`, 10, req.body, result => {
+      response.send(`respond with a resource: ${JSON.stringify(result)}`);
     });
   });
 

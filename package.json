@@ -4,10 +4,11 @@
   "description": "The gateway microservice",
   "private": true,
   "main": "./src/index.js",
+  "type": "module",
   "scripts": {
     "test": "cross-env NODE_OPTIONS=--experimental-vm-modules TESTING=1 npx jest",
     "start-rapid": "cross-env RAPID=1 node src/index.js",
-    "start-express": "cross-env node src/bin/www",
+    "start-express": "cross-env node src/app.js",
     "debug": "cross-env RAPID=1 nodemon src/index.js"
   },
   "repository": {
@@ -15,7 +16,7 @@
     "url": "git+https://github.com/DM885/Gateway.git"
   },
   "dependencies": {
-    "@ovcina/rapidriver": "^2.0.2",
+    "@ovcina/rapidriver": "^2.0.3",
     "cookie-parser": "~1.4.4",
     "debug": "~2.6.9",
     "express": "~4.16.1",

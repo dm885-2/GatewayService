@@ -1,29 +1,24 @@
-const createError = require('http-errors');
-const express = require('express');
-const path = require('path');
-const cookieParser = require('cookie-parser');
-const logger = require('morgan');
-import {host} from './helpers';
-import {RapidManager} from './rapid/RapidManager';
+import createError from 'http-errors';
+import express from 'express';
+import cookieParser from 'cookie-parser';
+import logger from 'morgan';
+import {host, port} from './helpers.js';
+import {RapidManager} from './rapid/RapidManager.js';
 
 
 // Setup rapid river.
 const rapidManager = new RapidManager(host);
 
 // Load all different routers.
-const indexRouter = require('./routes')(rapidManager);
+import indexRouterFunc from './routes/index.js';
+const indexRouter = indexRouterFunc(rapidManager);
 
 const app = express();
-
-// view engine setup
-app.set('views', path.join(__dirname, 'views'));
-app.set('view engine', 'jade');
 
 app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({extended: false}));
 app.use(cookieParser());
-app.use(express.static(path.join(__dirname, 'public')));
 
 // Define all different routers.
 app.use('/', indexRouter);
@@ -44,4 +39,5 @@ app.use(function (err, req, res, next) {
   res.render('error');
 });
 
-module.exports = app;
+app.listen(port);
+console.log(`Listening on ${port}`);

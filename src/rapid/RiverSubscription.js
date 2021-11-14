@@ -4,21 +4,25 @@ export class RiverSubscription {
 
   #callbacks;
 
-  constructor(host, river) {
+  constructor(host, river, event) {
     this.#callbacks = {};
 
+    console.log(`Creating RiverSubscription with host: ${host}, river: ${river}, event: ${event}`);
     // Create subscription to river.
-    rapid.subscribe(host, river, res => {
-      const msg = JSON.parse(res.content.toString());
+    rapid.subscribe(host, [{
+      river: river, event: event, work: res => {
+        console.log(`Received: ${JSON.stringify(res)}`);
+        const msg = res;
 
-      if (msg.session in this.#callbacks) {
-        // Execute the callback for the session.
-        this.#callbacks[msg.session](res);
+        if (msg.session in this.#callbacks) {
+          // Execute the callback for the session.
+          this.#callbacks[msg.session](res);
 
-        // Delete from the callbacks as this one is executed now.
-        delete this.#callbacks[msg.session];
+          // Delete from the callbacks as this one is executed now.
+          delete this.#callbacks[msg.session];
+        }
       }
-    });
+    }]);
   }
 
   /**
