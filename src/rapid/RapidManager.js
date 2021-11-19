@@ -1,7 +1,7 @@
 import rapid from '@ovcina/rapidriver';
-import {RiverSubscription} from './RiverSubscription.js';
+import RiverSubscription from './RiverSubscription.js';
 
-export class RapidManager {
+export default class RapidManager {
 
   #host;
   #subscriptions;

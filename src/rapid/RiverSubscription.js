@@ -1,6 +1,6 @@
 import rapid from '@ovcina/rapidriver';
 
-export class RiverSubscription {
+export default class RiverSubscription {
 
   #callbacks;
 
