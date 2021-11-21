@@ -3,7 +3,7 @@ import express from 'express';
 import cookieParser from 'cookie-parser';
 import logger from 'morgan';
 import {host, port} from './helpers.js';
-import {RapidManager} from './rapid/RapidManager.js';
+import RapidManager from './rapid/RapidManager.js';
 
 
 // Setup rapid river.
