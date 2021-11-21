@@ -2,10 +2,10 @@ import rapid from '@ovcina/rapidriver';
 
 export default class RiverSubscription {
 
-  #callbacks;
+  _callbacks;
 
   constructor(host, river, event) {
-    this.#callbacks = {};
+    this._callbacks = {};
 
     console.log(`Creating RiverSubscription with host: ${host}, river: ${river}, event: ${event}`);
     // Create subscription to river.
@@ -14,12 +14,12 @@ export default class RiverSubscription {
         console.log(`Received: ${JSON.stringify(res)}`);
         const msg = res;
 
-        if (msg.session in this.#callbacks) {
+        if (msg.session in this._callbacks) {
           // Execute the callback for the session.
-          this.#callbacks[msg.session](res);
+          this._callbacks[msg.session](res);
 
           // Delete from the callbacks as this one is executed now.
-          delete this.#callbacks[msg.session];
+          delete this._callbacks[msg.session];
         }
       }
     }]);
@@ -31,6 +31,6 @@ export default class RiverSubscription {
    * @param callback - Callback function to execute.
    */
   addCallback(session, callback) {
-    this.#callbacks[session] = callback;
+    this._callbacks[session] = callback;
   }
 }
