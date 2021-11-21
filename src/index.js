@@ -4,14 +4,11 @@ import cookieParser from 'cookie-parser';
 import logger from 'morgan';
 import {host, port} from './helpers.js';
 import RapidManager from './rapid/RapidManager.js';
+import routes from './routes/index.js';
 
 
 // Setup rapid river.
 const rapidManager = new RapidManager(host);
-
-// Load all different routers.
-import indexRouterFunc from './routes/index.js';
-const indexRouter = indexRouterFunc(rapidManager);
 
 const index = express();
 
@@ -21,7 +18,14 @@ index.use(express.urlencoded({extended: false}));
 index.use(cookieParser());
 
 // Define all different routers.
-index.use('/', indexRouter);
+routes(rapidManager).forEach(route => index[route.type](route.path, async (req, res) => {
+  if (!route.auth) {
+    route.callback(req, res);
+  } else {
+    // Route requires authentication but user is not authenticated.
+    res.status(401).send('Unauthorized');
+  }
+}));
 
 // catch 404 and forward to error handler
 index.use(function (req, res, next) {
