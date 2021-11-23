@@ -20,6 +20,8 @@ export default class RiverSubscription {
 
           // Delete from the callbacks as this one is executed now.
           delete this._callbacks[msg.session];
+        } else {
+          console.warn(`No known callback function for session ${msg.session} and event ${event}.`);
         }
       }
     }]);

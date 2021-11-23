@@ -19,6 +19,9 @@ export default class RapidManager {
 
     subscription.addCallback(session, callback);
 
+    // Add session ID to data before we publish it.
+    data.session = session;
+
     rapid.publish(this.#host, event, data);
   }
 }
