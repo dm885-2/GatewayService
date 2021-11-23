@@ -1,7 +1,11 @@
-import wildcard from './wildcard';
+import wildcard from './wildcard.js';
+import login from './login.js';
+import register from './register.js';
 
 export default function (rapidManager) {
   return [
-    wildcard(rapidManager)
+    wildcard(rapidManager),
+    login(rapidManager),
+    register(rapidManager)
   ];
 };
