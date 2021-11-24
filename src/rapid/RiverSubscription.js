@@ -33,14 +33,6 @@ export default class RiverSubscription {
    * @param callback - Callback function to execute.
    */
   addCallback(session, callback) {
-    if(this._callbacks[session])
-    {
-      this._callbacks[session](false);
-    }
-    
-    this._callbacks[session] = (data) => {
-      this._callbacks[session] = false;
-      callback(data);
-    };
+    this._callbacks[session] = callback;
   }
 }
