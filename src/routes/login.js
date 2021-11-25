@@ -7,7 +7,7 @@ export default function (rapidManager) {
       let ret = {
         error: true,
       };
-      rapidManager.publishAndSubscribe('signIn', 'signIn-response', res.locals.sessionID, {
+      await rapidManager.publishAndSubscribe('signIn', 'signIn-response', res.locals.sessionID, {
         username: req.body.username ?? '',
         password: req.body.password ?? '',
       }, resp => {

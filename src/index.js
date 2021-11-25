@@ -43,7 +43,7 @@ index.use((req, res, next) => {
 // Define all different routers.
 routes(rapidManager).forEach(route => index[route.type](route.path, async (req, res) => {
   if (!route.auth) {
-    route.callback(req, res);
+    await route.callback(req, res);
   } else {
     // Route requires authentication but user is not authenticated.
     res.status(401).send('Unauthorized');

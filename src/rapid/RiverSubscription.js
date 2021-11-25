@@ -14,14 +14,14 @@ export default class RiverSubscription {
         console.log(`Received: ${JSON.stringify(res)}`);
         const msg = res;
 
-        if (msg.session in this._callbacks) {
+        if (msg.sessionId in this._callbacks && msg.requestId in this._callbacks[msg.sessionId]) {
           // Execute the callback for the session.
-          this._callbacks[msg.session](res);
+          this._callbacks[msg.sessionId][msg.requestId](res);
 
           // Delete from the callbacks as this one is executed now.
-          delete this._callbacks[msg.session];
+          delete this._callbacks[msg.sessionId][msg.requestId];
         } else {
-          console.warn(`No known callback function for session ${msg.session} and event ${event}.`);
+          console.warn(`No known callback function for session ID ${msg.session}, request ID ${msg.requestId} and event ${event}.`);
         }
       }
     }]);
@@ -29,10 +29,14 @@ export default class RiverSubscription {
 
   /**
    * Add callback function for certain session to the river subscription.
-   * @param session - Session ID.
+   * @param sessionId - Session ID.
+   * @param requestId - Request ID.
    * @param callback - Callback function to execute.
    */
-  addCallback(session, callback) {
-    this._callbacks[session] = callback;
+  addCallback(sessionId, requestId, callback) {
+    if (!(sessionId in this._callbacks)) {
+      this._callbacks[sessionId] = {};
+    }
+    this._callbacks[sessionId][requestId] = callback;
   }
 }

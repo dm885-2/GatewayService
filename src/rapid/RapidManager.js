@@ -1,5 +1,6 @@
 import rapid from '@ovcina/rapidriver';
 import RiverSubscription from './RiverSubscription.js';
+import uid from 'uid-safe';
 
 export default class RapidManager {
 
@@ -11,16 +12,20 @@ export default class RapidManager {
     this.#subscriptions = {};
   }
 
-  publishAndSubscribe(event, callbackEvent, session, data, callback) {
+  async publishAndSubscribe(event, callbackEvent, sessionId, data, callback) {
     if (!(callbackEvent in this.#subscriptions)) {
       this.#subscriptions[callbackEvent] = new RiverSubscription(this.#host, 'gateway', callbackEvent);
     }
     const subscription = this.#subscriptions[callbackEvent];
 
-    subscription.addCallback(session, callback);
+    // Generate a random request ID to differentiate incoming answers and add it to the data body.
+    const requestId = await uid(18);
 
-    // Add session ID to data before we publish it.
-    data.session = session;
+    subscription.addCallback(sessionId, requestId, callback);
+
+    // Add session ID and request ID to data before we publish it.
+    data.sessionId = sessionId;
+    data.requestId = requestId;
 
     rapid.publish(this.#host, event, data);
   }
