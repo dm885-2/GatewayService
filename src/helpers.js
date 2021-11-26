@@ -3,7 +3,7 @@ import mysql from "mysql";
 
 
 const SECRET = process.env.SECRET ?? `3(?<,t2mZxj$5JT47naQFTXwqNWP#W>'*Kr!X!(_M3N.u8v}%N/JYGHC.Zwq.!v-`;  // JWT secret
-export const host = process.env.riverUrl ?? `amqp://127.0.0.1`;  // RabbitMQ url
+export const host = "amqp://" + (process.env.riverUrl ?? `localhost`);  // RabbitMQ url
 export const port = process.env.port ?? 8080;  // Express webserver port
 
 /**
