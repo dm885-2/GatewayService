@@ -12,9 +12,9 @@ export default function (rapidManager) {
         password: req.body.password ?? '',
       }, resp => {
         if (resp && resp.token) {
+          ret.userRank = resp.rank;
           ret.accessToken = resp.token;
           ret.error = false;
-          ret.session = resp.session;
         }
 
         res.send(ret);

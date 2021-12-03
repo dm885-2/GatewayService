@@ -7,10 +7,11 @@ export default function (rapidManager) {
       let ret = {
         error: true,
       };
+      console.log("New user!");
       await rapidManager.publishAndSubscribe("signUp", "signUp-response", res.locals.sessionID, {
         username: req.body.username,
         password: req.body.password,
-        rank: req.body.rank ?? 'customer'
+        rank: req.body.rank ?? 0
       }, resp => {
         if (resp) {
           ret.error = resp.error;
