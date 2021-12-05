@@ -1,18 +1,17 @@
 export default function (rapidManager) {
   return {
     type: 'post',
-    path: '/auth/login',
+    path: '/auth/accessToken',
     auth: false,
     callback: async (req, res) => {
       let ret = {
         error: true,
       };
-      await rapidManager.publishAndSubscribe('signIn', 'signIn-response', res.locals.sessionID, {
-        username: req.body.username ?? '',
-        password: req.body.password ?? '',
+      await rapidManager.publishAndSubscribe('accessToken', 'accessToken-response', res.locals.sessionID, {
+        token: req.body.refreshToken ?? ''
       }, resp => {
         if (resp && resp.token) {
-          ret.refreshToken = resp.token;
+          ret.accessToken = resp.token;
           ret.error = false;
           ret.session = resp.session;
         }

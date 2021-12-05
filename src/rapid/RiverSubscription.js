@@ -21,7 +21,7 @@ export default class RiverSubscription {
           // Delete from the callbacks as this one is executed now.
           delete this._callbacks[msg.sessionId][msg.requestId];
         } else {
-          console.warn(`No known callback function for session ID ${msg.session}, request ID ${msg.requestId} and event ${event}.`);
+          console.warn(`No known callback function for session ID ${msg.sessionId}, request ID ${msg.requestId} and event ${event}.`);
         }
       }
     }]);
