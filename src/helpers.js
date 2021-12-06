@@ -30,6 +30,7 @@ if(process.env.mysqlHost)
         database : 'db'
     });
     connection.connect();
+    query("CREATE DATABASE IF NOT EXISTS `dm885` /*!40100 DEFAULT CHARACTER SET latin1 */;");
 }
 
 /**
