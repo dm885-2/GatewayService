@@ -4,9 +4,9 @@ import mysql from "mysql";
 
 const SECRET = process.env.SECRET ?? `3(?<,t2mZxj$5JT47naQFTXwqNWP#W>'*Kr!X!(_M3N.u8v}%N/JYGHC.Zwq.!v-`;  // JWT secret
 
-const rapidUser = process.env.rapidUser ?? "guest";
-const rapidPass = process.env.rapidPass ?? "guest";
-export const host = "amqp://" + rapidUser + ":" + rapidPass + "@" + (process.env.riverUrl ?? `localhost`);  // RabbitMQ url
+const rabbitUser = process.env.rabbitUser ?? "guest";
+const rabbitPass = process.env.rabbitPass ?? "guest";
+export const host = "amqp://" + rabbitUser + ":" + rabbitPass + "@" + (process.env.rabbitHost ?? `localhost`);  // RabbitMQ url
 
 export const port = process.env.port ?? 8080;  // Express webserver port
 
@@ -30,6 +30,7 @@ if(process.env.mysqlHost)
         database : 'db'
     });
     connection.connect();
+    query("CREATE DATABASE IF NOT EXISTS `dm885` /*!40100 DEFAULT CHARACTER SET latin1 */;");
 }
 
 /**
