@@ -13,7 +13,7 @@ export default function (rapidManager) {
       }, resp => {
         if (resp && resp.token) {
           ret.userRank = resp.rank;
-          ret.accessToken = resp.token;
+          ret.refreshToken = resp.token;
           ret.error = false;
         }
 
