@@ -3,6 +3,7 @@ import login from './login.js';
 import register from './register.js';
 import accessToken from './accessToken.js';
 import getSolvers from './getSolvers.js';
+import postSolvers from './postSolvers.js';
 
 export default function (rapidManager) {
   return [
@@ -10,6 +11,7 @@ export default function (rapidManager) {
     login(rapidManager),
     register(rapidManager),
     accessToken(rapidManager),
-    getSolvers(rapidManager)
+    getSolvers(rapidManager),
+    postSolvers(rapidManager)
   ];
 };
