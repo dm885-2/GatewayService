@@ -4,6 +4,7 @@ import register from './register.js';
 import accessToken from './accessToken.js';
 import getSolvers from './getSolvers.js';
 import postSolvers from './postSolvers.js';
+import deleteSolver from './deleteSolver.js';
 
 export default function (rapidManager) {
   return [
@@ -12,6 +13,7 @@ export default function (rapidManager) {
     register(rapidManager),
     accessToken(rapidManager),
     getSolvers(rapidManager),
-    postSolvers(rapidManager)
+    postSolvers(rapidManager),
+    deleteSolver(rapidManager)
   ];
 };
