@@ -6,6 +6,11 @@ import getSolvers from './getSolvers.js';
 import postSolvers from './postSolvers.js';
 import deleteSolver from './deleteSolver.js';
 import putSolver from './putSolver.js';
+import crudCreate from './crudCreate.js';
+import crudRead from './crudRead.js';
+import crudUpdate from './crudUpdate.js';
+import crudDelete from './crudDelete.js';
+import crudGetAll from './crudGetAll.js';
 
 export default function (rapidManager) {
   return [
@@ -16,6 +21,11 @@ export default function (rapidManager) {
     getSolvers(rapidManager),
     postSolvers(rapidManager),
     deleteSolver(rapidManager),
-    putSolver(rapidManager)
+    putSolver(rapidManager),
+    crudCreate(rapidManager),
+    crudRead(rapidManager),
+    crudUpdate(rapidManager),
+    crudDelete(rapidManager),
+    crudGetAll(rapidManager)
   ];
 };
