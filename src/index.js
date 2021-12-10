@@ -5,7 +5,7 @@ import logger from 'morgan';
 import uid from 'uid-safe';
 import cors from "cors";
 
-import {host, port} from './helpers.js';
+import {getTokenData, host, port} from './helpers.js';
 import RapidManager from './rapid/RapidManager.js';
 import routes from './routes/index.js';
 
@@ -36,7 +36,7 @@ index.use(async (req, res, next) => {
 // Auth middleware.
 // Get the JWT token out of the authorization header if this header was included in the request.
 index.use((req, res, next) => {
-  let token = req.headers.Authorization;
+  let token = req.headers.authorization;
   if (token && token.includes('Bearer ')) {
     res.locals.jwtToken = token.split('Bearer ')[1];
   }
@@ -45,7 +45,7 @@ index.use((req, res, next) => {
 
 // Define all different routers.
 routes(rapidManager).forEach(route => index[route.type](route.path, async (req, res) => {
-  if (!route.auth) {
+  if (!route.auth || await getTokenData(res.locals.jwtToken)) {
     await route.callback(req, res);
   } else {
     // Route requires authentication but user is not authenticated.
