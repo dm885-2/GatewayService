@@ -15,8 +15,8 @@ env:
   GKE_CLUSTER: buildcluster
   GKE_ZONE: europe-north1
   NAMESPACE: rabbits                                       # Maybe change this, probably not though.
-  DEPLOYMENT_NAME: gateway                               # Change this to match the name in the deployment.yaml
-  IMAGE: ${{secrets.DOCKERHUB_USERNAME}}/gateway      # Change this to match the image name in deployment.yaml
+  DEPLOYMENT_NAME: rabbitmq-consumer                       # Change this to match the name in the deployment.yaml
+  IMAGE: ${{secrets.DOCKERHUB_USERNAME}}/testconsumer      # Change this to match the image name in deployment.yaml
   
 jobs:
   build:
@@ -74,10 +74,10 @@ jobs:
       id: k3s
       with:
         version: 'v1.21.2-k3s1'
-    - name: Use Node.js 14.x
+    - name: Use Node.js 16.x
       uses: actions/setup-node@v2
       with:
-        node-version: 14.x
+        node-version: 16.x
         cache: 'npm'        
     - name: Run Setup-Script
       run: |

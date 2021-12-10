@@ -6,16 +6,22 @@
   "main": "./src/index.js",
   "type": "module",
   "scripts": {
-    "test": "jest",
+    "test": "cross-env TESTING=1 npx jest",
     "start": "cross-env RAPID=1 node src/index.js",
-    "debug": "cross-env RAPID=1 nodemon src/index.js"
+    "debug": "cross-env RAPID=1 nodemon src/index.js",
+    "debugDocker": "cross-env RAPID=1 mysqlHost=localhost mysqlPass=password mysqlDb=dm885 mysqlUser=root nodemon src/index.js"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/DM885/Gateway.git"
+    "url": "git+https://github.com/DM885/GatewayService.git"
   },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/DM885/GatewayService/issues"
+  },
+  "homepage": "https://github.com/DM885/GatewayService#readme",
   "dependencies": {
-    "@jest/globals": "^27.3.1",
     "@ovcina/rapidriver": "^2.0.7",
     "cookie-parser": "~1.4.4",
     "cors": "^2.8.5",
@@ -26,14 +32,17 @@
     "jsonwebtoken": "^8.5.1",
     "morgan": "~1.9.1",
     "mysql": "^2.18.1",
-    "uid-safe": "^2.1.5"
+    "uid-safe": "^2.1.5",
+    "cross-env": "^7.0.3"
   },
   "devDependencies": {
     "@babel/core": "^7.16.0",
     "@babel/preset-env": "^7.16.4",
     "babel-jest": "^27.3.1",
     "cross-env": "^7.0.3",
+    "@jest/globals": "^27.3.1",
     "jest": "^27.3.1",
+    "cypress": "^9.1.0",
     "nodemon": "^2.0.14"
   }
 }
