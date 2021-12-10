@@ -16,7 +16,7 @@ export default function (rapidManager) {
         }
 
         res.send(ret);
-      });
+      }, res.locals.userId);
     }
   };
 };

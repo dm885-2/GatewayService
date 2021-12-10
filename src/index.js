@@ -45,7 +45,9 @@ index.use((req, res, next) => {
 
 // Define all different routers.
 routes(rapidManager).forEach(route => index[route.type](route.path, async (req, res) => {
-  if (!route.auth || await getTokenData(res.locals.jwtToken)) {
+  const tokenData = await getTokenData(res.locals.jwtToken);
+  if (!route.auth || tokenData) {
+    res.locals.userId = tokenData.uid ?? 0;
     await route.callback(req, res);
   } else {
     // Route requires authentication but user is not authenticated.
