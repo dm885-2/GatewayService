@@ -11,6 +11,7 @@ import crudRead from './crudRead.js';
 import crudUpdate from './crudUpdate.js';
 import crudDelete from './crudDelete.js';
 import crudGetAll from './crudGetAll.js';
+import jobHistoryGet from './jobHistoryGet.js';
 
 export default function (rapidManager) {
   return [
@@ -26,6 +27,7 @@ export default function (rapidManager) {
     crudRead(rapidManager),
     crudUpdate(rapidManager),
     crudDelete(rapidManager),
-    crudGetAll(rapidManager)
+    crudGetAll(rapidManager),
+    jobHistoryGet(rapidManager),
   ];
 };
