@@ -12,7 +12,7 @@ import crudUpdate from './crudUpdate.js';
 import crudDelete from './crudDelete.js';
 import crudGetAll from './crudGetAll.js';
 import jobHistoryGet from './jobHistoryGet.js';
-import jobHIstoryAdd from './jobHIstoryAdd.js';
+import jobHistoryAdd from './jobHistoryAdd.js';
 
 export default function (rapidManager) {
   return [
@@ -29,7 +29,7 @@ export default function (rapidManager) {
     crudUpdate(rapidManager),
     crudDelete(rapidManager),
     crudGetAll(rapidManager),
-    jobHIstoryAdd(rapidManager),
+    jobHistoryAdd(rapidManager),
     jobHistoryGet(rapidManager),
   ];
 };
