@@ -10,10 +10,9 @@ export default function (rapidManager) {
       await rapidManager.publishAndSubscribe('accessToken', 'accessToken-response', res.locals.sessionID, {
         token: req.body.refreshToken ?? ''
       }, resp => {
-        if (resp && resp.token) {
-          ret.accessToken = resp.token;
+        if (resp && resp.refreshToken) {
+          ret.accessToken = resp.refreshToken;
           ret.error = false;
-          ret.session = resp.session;
         }
 
         res.send(ret);
