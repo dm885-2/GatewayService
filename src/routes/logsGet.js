@@ -8,7 +8,7 @@ export default function (rapidManager) {
           error: true,
         };
         await rapidManager.publishAndSubscribe('job-getLogs', 'getLogs-response', res.locals.sessionID, {}, resp => { 
-          if (resp && resp.token) {
+          if (resp) {
             ret.error = false;
             ret.data = resp.data;
           }
