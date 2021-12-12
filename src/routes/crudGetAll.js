@@ -1,12 +1,12 @@
 export default function (rapidManager) {
     return {
       type: "get",
-      path: "/files",
+      path: "/files/all/:type",
       auth: false,
       callback: async (req, res) => {
         await rapidManager.publishAndSubscribe("get-all-files", "get-all-files-response", res.locals.sessionID, {
           userId: res.locals.userId,
-          filetype: req.body.filetype
+          filetype: req.params.type
         }, resp => {
           res.send(resp);
         }, res.locals.userId);
