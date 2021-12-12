@@ -11,7 +11,7 @@ export default function (rapidManager) {
           userID: res.locals.userId,
         }, resp => {
             
-          if (resp && resp.token) {
+          if (resp) {
             ret.error = false;
             ret.data = resp.data;
           }
