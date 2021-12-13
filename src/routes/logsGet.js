@@ -2,7 +2,7 @@ export default function (rapidManager) {
     return {
       type: 'get',
       path: '/logs',
-      auth: true,
+      auth: false,
       callback: async (req, res) => {
         let ret = {
           error: true,
