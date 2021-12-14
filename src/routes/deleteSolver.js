@@ -3,6 +3,7 @@ export default function (rapidManager) {
     type: 'delete',
     path: '/solvers/:id',
     auth: true,
+    minRequiredRank: 1,
     callback: async (req, res) => {
       let ret = {
         error: true,

@@ -3,7 +3,7 @@ import express from 'express';
 import cookieParser from 'cookie-parser';
 import logger from 'morgan';
 import uid from 'uid-safe';
-import cors from "cors";
+import cors from 'cors';
 
 import {getTokenData, host, port} from './helpers.js';
 import RapidManager from './rapid/RapidManager.js';
@@ -47,8 +47,13 @@ index.use((req, res, next) => {
 routes(rapidManager).forEach(route => index[route.type](route.path, async (req, res) => {
   const tokenData = await getTokenData(res.locals.jwtToken);
   if (!route.auth || tokenData) {
-    res.locals.userId = tokenData.uid ?? 0;
-    await route.callback(req, res);
+    if (!route.auth || tokenData.rank >= route.minRequiredRank) {
+      res.locals.userId = tokenData.uid ?? 0;
+      await route.callback(req, res);
+    } else {
+      // User has insufficient rights for this route.
+      res.status(403).send('Forbidden');
+    }
   } else {
     // Route requires authentication but user is not authenticated.
     res.status(401).send('Unauthorized');

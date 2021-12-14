@@ -3,6 +3,7 @@ export default function (rapidManager) {
       type: "put",
       path: "/files/:id",
       auth: false,
+      minRequiredRank: 0,
       callback: async (req, res) => {
         await rapidManager.publishAndSubscribe("update-file", "update-file-response", res.locals.sessionID, {
           fileId: req.params.id,
@@ -13,4 +14,4 @@ export default function (rapidManager) {
       }
     };
   };
-  
+

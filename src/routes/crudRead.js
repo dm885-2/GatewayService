@@ -3,6 +3,7 @@ export default function (rapidManager) {
       type: "get",
       path: "/files/:id",
       auth: false,
+      minRequiredRank: 0,
       callback: async (req, res) => {
         await rapidManager.publishAndSubscribe("read-file", "read-file-response", res.locals.sessionID, {
           fileId: req.params.id,
@@ -14,4 +15,4 @@ export default function (rapidManager) {
       }
     };
   };
-  
+

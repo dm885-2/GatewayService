@@ -3,6 +3,7 @@ export default function (rapidManager) {
       type: 'post',
       path: '/jobs',
       auth: true,
+      minRequiredRank: 0,
       callback: async (req, res) => {
         const d = req.body;
         await rapidManager.publishAndSubscribe('add-job', 'add-job-response', res.locals.sessionID, {
@@ -16,4 +17,3 @@ export default function (rapidManager) {
       }
     };
   };
-  

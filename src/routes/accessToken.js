@@ -3,6 +3,7 @@ export default function (rapidManager) {
     type: 'post',
     path: '/auth/accessToken',
     auth: false,
+    minRequiredRank: 0,
     callback: async (req, res) => {
       let ret = {
         error: true,

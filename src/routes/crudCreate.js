@@ -3,6 +3,7 @@ export default function (rapidManager) {
       type: "post",
       path: "/files",
       auth: false,
+      minRequiredRank: 0,
       callback: async (req, res) => {
         await rapidManager.publishAndSubscribe("create-file", "create-file-response", res.locals.sessionID, {
           filename: req.body.filename,
@@ -15,4 +16,4 @@ export default function (rapidManager) {
       }
     };
   };
-  
+

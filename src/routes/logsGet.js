@@ -3,19 +3,20 @@ export default function (rapidManager) {
       type: 'get',
       path: '/logs',
       auth: false,
+      minRequiredRank: 0,
       callback: async (req, res) => {
         let ret = {
           error: true,
         };
-        await rapidManager.publishAndSubscribe('job-getLogs', 'getLogs-response', res.locals.sessionID, {}, resp => { 
+        await rapidManager.publishAndSubscribe('job-getLogs', 'getLogs-response', res.locals.sessionID, {}, resp => {
           if (resp) {
             ret.error = false;
             ret.data = resp.data;
           }
-  
+
           res.send(ret);
         }, res.locals.userId);
       }
     };
   };
-  
+

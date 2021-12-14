@@ -3,6 +3,7 @@ export default function (rapidManager) {
     type: 'get',
     path: '/solvers',
     auth: true,
+    minRequiredRank: 0,
     callback: async (req, res) => {
       let ret = {
         error: true,
