@@ -14,7 +14,7 @@ export default class RiverSubscription {
     console.log(`Creating RiverSubscription with host: ${host}, river: ${river}, event: ${event}`);
     // Create subscription to river.
     rapid.subscribe(host, [{
-      river: river, event: event, work: this._work
+      river: river, event: event, work: res => this._work(res)
     }]);
   }
 
