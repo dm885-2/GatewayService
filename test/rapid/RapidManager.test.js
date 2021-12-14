@@ -56,4 +56,46 @@ describe('A RapidManager', () => {
     // Check that it has published the message onto the rapid.
     expect(rapid.publish).toHaveBeenCalledTimes(2);
   });
+
+  it('should publish a log message onto the rapid when calling the log function.', () => {
+    // Mock the functions.
+    const callbackFn = jest.fn();
+    const data = {foo: 'bar'};
+    const userId = 1;
+
+    // Call the log function.
+    manager._log(callbackFn, userId)(data);
+
+    // Check that it has published the message onto the rapid.
+    expect(rapid.publish).toHaveBeenCalledTimes(1);
+    expect(rapid.publish).toHaveBeenCalledWith(host, 'logIt', data);
+  });
+
+  it('should call the callback function when calling the log function.', () => {
+    // Mock the functions.
+    const callbackFn = jest.fn();
+    const data = {foo: 'bar'};
+    const userId = 1;
+
+    // Call the log function.
+    manager._log(callbackFn, userId)(data);
+
+    // Check that it has published the message onto the rapid.
+    expect(callbackFn).toHaveBeenCalledTimes(1);
+    expect(callbackFn).toHaveBeenCalledWith(data);
+  });
+
+  it('should contain the userId in the data sent to the logIt event when calling the log function.', () => {
+    // Mock the functions.
+    const callbackFn = jest.fn();
+    const data = {foo: 'bar'};
+    const userId = 1;
+
+    // Call the log function.
+    manager._log(callbackFn, userId)(data);
+
+    // Check that it has published the message onto the rapid.
+    expect(rapid.publish).toHaveBeenCalledTimes(1);
+    expect(rapid.publish).toHaveBeenCalledWith(host, 'logIt', {foo: 'bar', userId: 1});
+  });
 });

@@ -35,13 +35,15 @@ describe('A RiverSubscription', () => {
     uid.mockReturnValue(requestId);
 
     // Add a callback function.
-    const callback = () => {
-      console.log('this is a callback function');
-    };
-    riverSubscription.addCallback(sessionId, requestId, callback);
+    const callbackFn = jest.fn();
+    riverSubscription.addCallback(sessionId, requestId, callbackFn);
+    const anotherRequestId = 2;
+    const anotherCallbackFn = jest.fn();
+    riverSubscription.addCallback(sessionId, anotherRequestId, anotherCallbackFn);
 
     // Check if the callback exists in the map.
-    expect(riverSubscription._callbacks[sessionId][requestId] === callback).toBeTruthy();
+    expect(riverSubscription._callbacks[sessionId][requestId] === callbackFn).toBeTruthy();
+    expect(riverSubscription._callbacks[sessionId][anotherRequestId] === anotherCallbackFn).toBeTruthy();
   });
 
   it('should execute the callback function when receiving the response with the same session and request ID.', () => {

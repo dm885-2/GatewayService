@@ -13,13 +13,12 @@ export default class RapidManager {
   }
 
   /**
-   * Automaticly logs responses.
+   * Automatically logs responses.
    */
-  #log(callback, userId)
-  {
+  _log(callback, userId) {
     return data => {
       data.userId = userId;
-      rapid.publish(this.#host, "logIt", data);
+      rapid.publish(this.#host, 'logIt', data);
       callback(data);
     };
   }
@@ -33,7 +32,7 @@ export default class RapidManager {
     // Generate a random request ID to differentiate incoming answers and add it to the data body.
     const requestId = await uid(18);
 
-    subscription.addCallback(sessionId, requestId, this.#log(callback, userId));
+    subscription.addCallback(sessionId, requestId, this._log(callback, userId));
 
     // Add session ID and request ID to data before we publish it.
     data.sessionId = sessionId;
