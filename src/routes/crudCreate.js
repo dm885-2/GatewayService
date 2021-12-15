@@ -2,7 +2,7 @@ export default function (rapidManager) {
     return {
       type: "post",
       path: "/files",
-      auth: false,
+      auth: true,
       minRequiredRank: 0,
       callback: async (req, res) => {
         await rapidManager.publishAndSubscribe("create-file", "create-file-response", res.locals.sessionID, {
