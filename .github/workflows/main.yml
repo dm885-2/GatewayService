@@ -67,6 +67,7 @@ jobs:
     
   testing:
     runs-on: ubuntu-latest
+    timeout-minutes: 4
     steps:
     - uses: actions/checkout@v2
     - uses: debianmaster/actions-k3s@master
@@ -86,14 +87,12 @@ jobs:
         ./test_services.sh
       shell: bash
     - name: Wait for rollout
-      timeout-minutes: 4
       run: |
         ./.github/k3s-wait.sh
     - name: Deploy Service
       run: |
         cat ./deployment.yaml | sed "s/${{secrets.DOCKERHUB_USERNAME}}\/${{env.DEPLOYMENT_NAME}}/${{secrets.DOCKERHUB_USERNAME}}\/${{env.DEPLOYMENT_NAME}}-testing/g" | kubectl -n ${{ env.NAMESPACE }} apply -f -
     - name: Wait for service rollout
-      timeout-minutes: 4
       run: |
         ./.github/k3s-wait.sh
         kubectl get pods 
