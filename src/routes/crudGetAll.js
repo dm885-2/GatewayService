@@ -2,7 +2,7 @@ export default function (rapidManager) {
     return {
       type: "get",
       path: "/files/all/:type",
-      auth: false,
+      auth: true,
       minRequiredRank: 0,
       callback: async (req, res) => {
         await rapidManager.publishAndSubscribe("get-all-files", "get-all-files-response", res.locals.sessionID, {

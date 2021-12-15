@@ -2,7 +2,7 @@ export default function (rapidManager) {
     return {
       type: "delete",
       path: "/files/:id",
-      auth: false,
+      auth: true,
       minRequiredRank: 0,
       callback: async (req, res) => {
         await rapidManager.publishAndSubscribe("delete-file", "delete-file-response", res.locals.sessionID, {
