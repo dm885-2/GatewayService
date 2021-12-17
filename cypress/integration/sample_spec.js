@@ -6,10 +6,7 @@
     
     /** Login before each test in the file: */
     // beforeEach(()=> {
-    //     const uname = "u"+Date.now();
-    //     const pass = "p"+Date.now();
-    //     cy.register(uname, pass);
-    //     cy.login(uname, pass);
+    //     cy.loginAsUser();
     //     cy.getAT();
     // });
 
