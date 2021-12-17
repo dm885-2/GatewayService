@@ -28,7 +28,7 @@ Cypress.Commands.add('loginAsUser', () => {
         url:'/auth/login',
         body: {
           username: "user",
-          password: "user_supersecret"
+          password: "user_supersecure"
         }
       })
       .as('loginResponse')
@@ -46,7 +46,7 @@ Cypress.Commands.add('loginAsAdmin', () => {
       url:'/auth/login',
       body: {
         username: "admin",
-        password: "admin_supersecret"
+        password: "admin_supersecure"
       }
     })
     .as('loginResponse')
