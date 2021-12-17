@@ -1,15 +1,15 @@
 # ------- UN-COMMENT THE SERVICES YOU WANT TO TEST WITH THIS SERVICE ------- #
 
                   #   DONT UNCOMMENT YOUR OWN SERVICE HERE    #
-# -------------------------------------------------------------------------- #          
-          
+# -------------------------------------------------------------------------- #
+
 # GATEWAY
 kubectl -n rabbits apply -f https://raw.githubusercontent.com/DM885/GatewayService/main/deployment.yaml
 
 # CRUD SERVICE
 # kubectl -n rabbits apply -f https://raw.githubusercontent.com/DM885/CRUDservice/main/deployment.yaml
 
-# SERVICE INFO SERVICE
+# SOLVER INFO SERVICE
 # kubectl -n rabbits apply -f https://raw.githubusercontent.com/DM885/SolverInfoService/main/deployment.yaml
 
 # AUTH SERVICE
