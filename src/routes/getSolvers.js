@@ -10,7 +10,8 @@ export default function (rapidManager) {
       };
       await rapidManager.publishAndSubscribe('list-solvers', 'list-solvers-response', res.locals.sessionID, {}, resp => {
         if (resp && resp.solvers) {
-          ret = resp.solvers;
+          ret.error = false;
+          ret.data = resp.solvers;
         }
 
         res.send(ret);
