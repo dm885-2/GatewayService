@@ -44,7 +44,7 @@ index.use((req, res, next) => {
 });
 
 // Define all different routers.
-routes(rapidManager).forEach(route => index[route.type](route.path, async (req, res) => {
+routes(rapidManager).forEach(route => index[route.type.toLowerCase()](route.path, async (req, res) => {
   const tokenData = await getTokenData(res.locals.jwtToken);
   if (!route.auth || tokenData) {
     if (!route.auth || tokenData.rank >= route.minRequiredRank) {
