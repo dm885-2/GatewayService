@@ -1,9 +1,9 @@
 export default function (rapidManager) {
     return {
-      type: 'get',
+      type: 'GET',
       path: '/users',
-      auth: false,
-      minRequiredRank: 0,
+      auth: true,
+      minRequiredRank: 1,
       callback: async (req, res) => {
         let ret = {
           error: true,
