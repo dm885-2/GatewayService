@@ -7,7 +7,7 @@ export default function (rapidManager) {
     callback: async (req, response) => {
       await rapidManager.publishAndSubscribe(req.params.event, `${req.params.event}-callback`, response.locals.sessionID, req.body, result => {
         response.send(`respond with a resource: ${JSON.stringify(result)}`);
-      }, res.locals.userId);
+      }, response.locals.userId);
     }
   };
 }
