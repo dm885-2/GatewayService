@@ -14,7 +14,7 @@ import crudGetAll from './crudGetAll.js';
 import jobHistoryGet from './jobHistoryGet.js';
 import jobHistoryAdd from './jobHistoryAdd.js';
 import logsGet from './logsGet.js';
-import userGet from './userGet.js';
+import usersGet from './usersGet.js';
 
 export default function (rapidManager) {
   return [
@@ -34,6 +34,6 @@ export default function (rapidManager) {
     jobHistoryAdd(rapidManager),
     jobHistoryGet(rapidManager),
     logsGet(rapidManager),
-    userGet(rapidManager),
+    usersGet(rapidManager),
   ];
 };
