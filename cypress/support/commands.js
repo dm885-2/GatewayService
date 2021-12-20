@@ -38,7 +38,7 @@ Cypress.Commands.add('loginAsUser', () => {
       })
       .its('status')
       .should('eq', 200);
-})
+});
 
 Cypress.Commands.add('loginAsAdmin', () => {
   cy.request({
@@ -56,7 +56,7 @@ Cypress.Commands.add('loginAsAdmin', () => {
     })
     .its('status')
     .should('eq', 200);
-})
+});
 
 Cypress.Commands.add('getAT', () => {
   const token = Cypress.env('rtoken');
@@ -74,4 +74,43 @@ Cypress.Commands.add('getAT', () => {
     })
     .its('status')
     .should('eq', 200);
-})
+});
+
+Cypress.Commands.add('getAllSolvers', ()=> {
+  const token = Cypress.env('token');
+  cy.request({
+    method: 'GET',
+    url: '/solvers',
+    headers: {
+      'Content-Type': 'application/json',
+      'Authorization': 'Bearer ' + token
+    },
+  })
+    .as('getAllSolversResponse')
+    .then(response => {
+      Cypress.env('getAllSolvers', response);
+      return response;
+    })
+    .its('status')
+    .should('eq', 200);
+});
+
+Cypress.Commands.add('deleteAllSolvers', ()=> {
+  const token = Cypress.env('token');
+  const all = Cypress.env('getAllSolvers');
+
+  if(all.body) {
+    all.body.data.forEach(solver => {
+      cy.request({
+        method: 'DELETE',
+        url: `/solvers/${solver.id}`,
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': 'Bearer ' + token
+        }
+      })
+        .its('status')
+        .should('eq', 200);
+    });
+  }
+});
