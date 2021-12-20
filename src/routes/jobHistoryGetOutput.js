@@ -8,11 +8,11 @@ export default function (rapidManager) {
         let ret = {
           error: true,
         };
-        await rapidManager.publishAndSubscribe('job-ouput', 'job-ouput-response', res.locals.sessionID, {
+        await rapidManager.publishAndSubscribe('job-output', 'job-output-response', res.locals.sessionID, {
           id: req.params.id,
         }, resp => {
 
-          if (resp) {
+          if (resp && resp.data) {
             ret.error = false;
             ret.data = resp.data;
           }
