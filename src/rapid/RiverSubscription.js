@@ -45,7 +45,7 @@ export default class RiverSubscription {
 
       // Delete from the callbacks as this one is executed now.
       delete this._callbacks[msg.sessionId][msg.requestId];
-    } else {
+    } else if(msg.requestId !== -1) {
       // No known callback function for this sessionId/requestId/event; republish back on the queue as another gateway instance might be handling this.
       rapid.publish(this._host, this._event, msg);
       console.debug(`Republished message for event ${this._event} as no known callback function for session ID ${msg.sessionId} and request ID ${msg.requestId}.`);
