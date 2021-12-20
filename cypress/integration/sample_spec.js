@@ -1,37 +1,56 @@
+/** 	Sample taken from CRUD test 		**/
 
 // describe('READ Test', () => {
-//     //add a files before each test
-//     beforeEach(()=> {
-//         Cypress.Cookies.defaults({
-//             preserve: "sessionId"
-//           })
 
-//         cy.request("POST", "/files", {
-//             "filename": "testFile.mzn",
-//             "filetype": "mzn",
-//             "data": "This is the file content!"
-//         }).then((res) => {
-//             return;
-//         });
-//     })
-    
-//     //Delete all files after each test
-//    afterEach(()=>{
-//         cy.request('GET', "/files/all/mzn").then(res => {
-//             res.body.results.forEach(file => {
-//                 cy.request('DELETE', "/files/"+file.fileId);
-//             })
-//             return;
-//         });
-//    })
+    /** Login before each test in the file: */
+    // beforeEach(()=> {
+    //     cy.loginAsUser();
+    //     cy.getAT();
+    // });
 
-//    it("READ TEST", () => {
-//         cy.request('GET', "/files/all/mzn").then(file => {
-//             cy.request("GET", "/files/"+file.body.results[0].fileId).then((res) => {
-//                 expect(res).to.have.property("status", 200);
-//                 expect(res.body).to.have.property("error", false);
-//                 return;
-//             });
-//         });
-//     });
-// });
+    /** CREATE FILE TEST */
+    // it("CREATE test", () => {
+    //     cy.request({
+    //         method: "POST",
+    //         url: "/files",
+    //         headers: {
+    //             "Content-Type": "application/json",
+    //             "Authorization": "Bearer " + Cypress.env("token")
+    //         },
+    //         body: {
+    //             filename: "testFile.mzn",
+    //             filetype: "mzn",
+    //             data : "fuk of ya buggar"
+    //         }
+    //     }).then(response => {
+    //         expect(response.status).to.eq(200);
+    //         expect(response.body.error).to.eq(false);
+    //         expect(response.body.filename).to.eq('testFile.mzn');
+    //         expect(response.body.filetype).to.eq('mzn');
+    //     })
+    // })
+
+    /** DELETE ALL FILES AFTER EACH TEST */
+    // afterEach(() => {
+    //     cy.request({
+    //         method: "GET",
+    //         url: "/files/all/mzn",
+    //         headers: {
+    //             "Content-Type": "application/json",
+    //             "Authorization": "Bearer " + Cypress.env("token")
+    //         }
+    //     }).then(res => {
+    //         res.body.results.forEach(file => {
+    //             cy.request({
+    //                 method: "DELETE",
+    //                 url: "/files/"+file.fileId,
+    //                 headers: {
+    //                     "Content-Type": "application/json",
+    //                     "Authorization": "Bearer " + Cypress.env("token")
+    //                 }
+    //             })
+    //             return;
+    //         });
+    //     })
+    // })
+//});
