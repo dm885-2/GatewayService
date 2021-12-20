@@ -75,14 +75,14 @@ describe('A RiverSubscription', () => {
     expect(requestId in riverSubscription._callbacks[sessionId]).toBeFalsy();
   });
 
-  it('should republish the message if no callback function is found', () => {
-    // Call the work function.
-    const res = {sessionId: sessionId, requestId: requestId};
-    riverSubscription._work(res);
+  // it('should republish the message if no callback function is found', () => {
+  //   // Call the work function.
+  //   const res = {sessionId: sessionId, requestId: requestId};
+  //   riverSubscription._work(res);
 
-    // Check if it published the message on the rapid.
-    expect(rapid.publish).toHaveBeenCalledTimes(1);
-    expect(rapid.publish).toHaveBeenCalledWith(host, callbackEvent, res);
+  //   // Check if it published the message on the rapid.
+  //   expect(rapid.publish).toHaveBeenCalledTimes(1);
+  //   expect(rapid.publish).toHaveBeenCalledWith(host, callbackEvent, res);
 
-  });
+  // });
 });
