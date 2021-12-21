@@ -1,5 +1,7 @@
 import wildcard from './wildcard.js';
 import login from './login.js';
+import setSolverLimit from './setSolverLimit.js';
+import userQueueClear from './userQueueClear.js';
 import register from './register.js';
 import accessToken from './accessToken.js';
 import getSolvers from './getSolvers.js';
@@ -22,6 +24,8 @@ import userDelete from './userDelete.js';
 export default function (rapidManager) {
   return [
     wildcard(rapidManager),
+    userQueueClear(rapidManager),
+    setSolverLimit(rapidManager),
     login(rapidManager),
     register(rapidManager),
     accessToken(rapidManager),
