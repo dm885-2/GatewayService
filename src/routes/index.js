@@ -13,6 +13,7 @@ import crudDelete from './crudDelete.js';
 import crudGetAll from './crudGetAll.js';
 import jobHistoryGet from './jobHistoryGet.js';
 import jobHistoryGetOutput from './jobHistoryGetOutput.js';
+import jobHistoryRemove from './jobHistoryRemove.js';
 import jobHistoryAdd from './jobHistoryAdd.js';
 import logsGet from './logsGet.js';
 import usersGet from './usersGet.js';
@@ -33,6 +34,7 @@ export default function (rapidManager) {
     crudDelete(rapidManager),
     crudGetAll(rapidManager),
     jobHistoryAdd(rapidManager),
+    jobHistoryRemove(rapidManager),
     jobHistoryGetOutput(rapidManager),
     jobHistoryGet(rapidManager),
     logsGet(rapidManager),
