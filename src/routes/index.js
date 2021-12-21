@@ -17,6 +17,7 @@ import jobHistoryRemove from './jobHistoryRemove.js';
 import jobHistoryAdd from './jobHistoryAdd.js';
 import logsGet from './logsGet.js';
 import usersGet from './usersGet.js';
+import userDelete from './userDelete.js';
 
 export default function (rapidManager) {
   return [
@@ -39,5 +40,7 @@ export default function (rapidManager) {
     jobHistoryGet(rapidManager),
     logsGet(rapidManager),
     usersGet(rapidManager),
+    userDelete(rapidManager),
+
   ];
 };
