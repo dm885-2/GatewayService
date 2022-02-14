@@ -3,7 +3,7 @@ import express from 'express';
 import cookieParser from 'cookie-parser';
 import logger from 'morgan';
 import uid from 'uid-safe';
-//import cors from 'cors';
+import cors from 'cors';
 
 import {getTokenData, host, port} from './helpers.js';
 import RapidManager from './rapid/RapidManager.js';
@@ -16,7 +16,7 @@ const rapidManager = new RapidManager(host);
 const index = express();
 
 index.use(logger('dev'));
-//index.use(cors());
+index.use(cors());
 index.use(express.json());
 index.use(express.urlencoded({extended: false}));
 index.use(cookieParser());
