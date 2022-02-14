@@ -16,7 +16,7 @@ const rapidManager = new RapidManager(host);
 const index = express();
 
 index.use(logger('dev'));
-index.use(cors());
+//index.use(cors());
 index.use(express.json());
 index.use(express.urlencoded({extended: false}));
 index.use(cookieParser());
