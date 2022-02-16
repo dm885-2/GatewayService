@@ -4,7 +4,7 @@ import cookieParser from 'cookie-parser';
 import logger from 'morgan';
 import uid from 'uid-safe';
 import cors from 'cors';
-index.use(cors());
+
 import {getTokenData, host, port} from './helpers.js';
 import RapidManager from './rapid/RapidManager.js';
 import routes from './routes/index.js';
@@ -16,10 +16,16 @@ const rapidManager = new RapidManager(host);
 const index = express();
 
 index.use(logger('dev'));
-
+index.use(cors());
 index.use(express.json());
 index.use(express.urlencoded({extended: false}));
 index.use(cookieParser());
+
+index.use(function(req, res, next) {
+  res.header("Access-Control-Allow-Origin", "*");
+  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+  next();
+});
 
 // Session ID middleware.
 // Create new session ID and put it in a HTTP Only Cookie if no session ID exists yet.
