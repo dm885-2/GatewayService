@@ -51,12 +51,12 @@ index.use((req, res, next) => {
 
 // Define all different routers.
 routes(rapidManager).forEach(route => index[route.type.toLowerCase()](route.path, async (req, res) => {
-  res.set('Access-Control-Allow-Origin', '*');
+  res.header('Access-Control-Allow-Origin', '*');
   if (req.method === 'OPTIONS') {
     // Send response to OPTIONS requests
-    res.set('Access-Control-Allow-Methods', 'GET');
-    res.set('Access-Control-Allow-Headers', 'Content-Type');
-    res.set('Access-Control-Max-Age', '3600');
+    res.header('Access-Control-Allow-Methods', '*');
+    res.header('Access-Control-Allow-Headers', 'Content-Type');
+    res.header('Access-Control-Max-Age', '3600');
     res.status(204).send('');
   } else {
     res.send('Hello World!');
