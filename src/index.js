@@ -55,7 +55,7 @@ routes(rapidManager).forEach(route => index[route.type.toLowerCase()](route.path
   if (req.method === 'OPTIONS') {
     // Send response to OPTIONS requests
     res.header('Access-Control-Allow-Methods', '*');
-    res.header('Access-Control-Allow-Headers', 'Content-Type');
+    res.header('Access-Control-Allow-Headers', '*');
     res.header('Access-Control-Max-Age', '3600');
     res.status(204).send('');
   } else {
