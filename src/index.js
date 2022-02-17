@@ -5,9 +5,6 @@ import logger from 'morgan';
 import uid from 'uid-safe';
 import cors from 'cors';
 
-const index = express();
-index.use(cors());
-index.options('*', cors())
 
 import {getTokenData, host, port} from './helpers.js';
 import RapidManager from './rapid/RapidManager.js';
@@ -17,7 +14,9 @@ import routes from './routes/index.js';
 // Setup rapid river.
 const rapidManager = new RapidManager(host);
 
-
+const index = express();
+index.use(cors({origin: true}));
+index.options('*', cors())
 
 index.use(logger('dev'));
 
@@ -51,16 +50,6 @@ index.use((req, res, next) => {
 
 // Define all different routers.
 routes(rapidManager).forEach(route => index[route.type.toLowerCase()](route.path, async (req, res) => {
-  res.header('Access-Control-Allow-Origin', '*');
-  if (req.method === 'OPTIONS') {
-    // Send response to OPTIONS requests
-    res.header('Access-Control-Allow-Methods', '*');
-    res.header('Access-Control-Allow-Headers', '*');
-    res.header('Access-Control-Max-Age', '3600');
-    res.status(204).send('');
-  } else {
-    res.send('Hello World!');
-  }
   const tokenData = await getTokenData(res.locals.jwtToken);
   if (!route.auth || tokenData) {
     if (!route.auth || tokenData.rank >= route.minRequiredRank) {
