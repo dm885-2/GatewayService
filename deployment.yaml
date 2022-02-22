@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
       - name: gateway          # CHANGE THIS TO YOUR SERVICE NAME
-        image: dm885/gateway          # CHANGE THIS TO YOUR DOCKER IMAGE
+        image: kaasper/gateway          # CHANGE THIS TO YOUR DOCKER IMAGE
         imagePullPolicy: Always
         ports:
         - containerPort: 3000
